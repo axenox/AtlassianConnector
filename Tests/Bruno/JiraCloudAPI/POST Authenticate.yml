@@ -1,0 +1,29 @@
+info:
+  name: POST Authenticate
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: https://auth.atlassian.com/oauth/token
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Accept
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "grant_type": "client_credentials",
+        "client_id": "{{cliend_id}}",
+        "client_secret": "{{client_secret}}",
+        "audience": "api.atlassian.com"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,34 @@
+info:
+  name: GET Attachments from a Ticket
+  type: http
+  seq: 8
+
+http:
+  method: GET
+  url: https://api.atlassian.com/ex/jira/{{cloud_id}}/rest/api/3/issue/LDAD-21773?fields=attachment
+  params:
+    - name: fields
+      value: attachment
+      type: query
+  auth:
+    type: oauth2
+    flow: client_credentials
+    accessTokenUrl: https://auth.atlassian.com/oauth/token
+    credentials:
+      clientId: "{{cliend_id}}"
+      clientSecret: "{{client_secret}}"
+      placement: basic_auth_header
+    tokenConfig:
+      id: credentials
+      placement:
+        header: Bearer
+      source: access_token
+    settings:
+      autoFetchToken: true
+      autoRefreshToken: false
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

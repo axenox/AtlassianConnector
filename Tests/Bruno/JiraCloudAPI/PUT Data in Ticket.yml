@@ -1,0 +1,57 @@
+info:
+  name: PUT Data in Ticket
+  type: http
+  seq: 5
+
+http:
+  method: PUT
+  url: https://api.atlassian.com/ex/jira/{{cloud_id}}/rest/api/3/issue/ADACN-2/comment
+  headers:
+    - name: Accept
+      value: application/json
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "fields": {
+          "description": {
+            "type": "doc",
+            "version": 1,
+            "content": [
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "Saskias Test Api Call Content"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+  auth:
+    type: oauth2
+    flow: client_credentials
+    accessTokenUrl: https://auth.atlassian.com/oauth/token
+    credentials:
+      clientId: "{{cliend_id}}"
+      clientSecret: "{{client_secret}}"
+      placement: basic_auth_header
+    tokenConfig:
+      id: credentials
+      placement:
+        header: Bearer
+      source: access_token
+    settings:
+      autoFetchToken: true
+      autoRefreshToken: false
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
