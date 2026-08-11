@@ -3,6 +3,11 @@
     "require": {
         "exface/core": "^1.0"
     },
+    "support": {
+        "source": "https://github.com/axenox/AtlassianConnector",
+        "docs": "https://github.com/axenox/AtlassianConnector/blob/1.x-dev/Docs",
+        "issues": "https://github.com/axenox/AtlassianConnector/issues"
+    },
     "autoload": {
         "psr-4": {
             "\\axenox\\AtlassianConnector\\": ""
