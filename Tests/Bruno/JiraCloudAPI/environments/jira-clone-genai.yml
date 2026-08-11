@@ -1,0 +1,11 @@
+name: jira-clone-genai
+variables:
+  - secret: true
+    name: client_secret
+    description: ""
+  - secret: true
+    name: client_id
+    description: ""
+  - secret: true
+    name: cloud_id
+    description: ""
