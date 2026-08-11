@@ -16,7 +16,7 @@ http:
     data: |-
       {
         "grant_type": "client_credentials",
-        "client_id": "{{cliend_id}}",
+        "client_id": "{{client_id}}",
         "client_secret": "{{client_secret}}",
         "audience": "api.atlassian.com"
       }
