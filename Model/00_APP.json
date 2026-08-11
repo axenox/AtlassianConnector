@@ -1,0 +1,90 @@
+{
+    "object_alias": "exface.Core.APP",
+    "columns": [
+        {
+            "name": "_EXPORT_SUMMARY",
+            "hidden": true,
+            "attribute_alias": "LABEL"
+        },
+        {
+            "name": "CREATED_ON",
+            "attribute_alias": "CREATED_ON"
+        },
+        {
+            "name": "MODIFIED_ON",
+            "attribute_alias": "MODIFIED_ON"
+        },
+        {
+            "name": "CREATED_BY_USER",
+            "attribute_alias": "CREATED_BY_USER"
+        },
+        {
+            "name": "MODIFIED_BY_USER",
+            "attribute_alias": "MODIFIED_BY_USER"
+        },
+        {
+            "name": "UID",
+            "attribute_alias": "UID"
+        },
+        {
+            "name": "DEFAULT_LANGUAGE_CODE",
+            "attribute_alias": "DEFAULT_LANGUAGE_CODE"
+        },
+        {
+            "name": "DESCRIPTION",
+            "attribute_alias": "DESCRIPTION"
+        },
+        {
+            "name": "DOCS_INTRO",
+            "attribute_alias": "DOCS_INTRO"
+        },
+        {
+            "name": "ALIAS",
+            "attribute_alias": "ALIAS"
+        },
+        {
+            "name": "NAME",
+            "attribute_alias": "NAME"
+        }
+    ],
+    "rows": [
+        {
+            "_EXPORT_SUMMARY": "axenxo Atlassian Connector [axenox.AtlassianConnector]",
+            "CREATED_ON": "2026-08-11 13:14:00",
+            "MODIFIED_ON": "2026-08-11 13:14:00",
+            "CREATED_BY_USER": "0x31000000000000000000000000000000",
+            "MODIFIED_BY_USER": "0x31000000000000000000000000000000",
+            "UID": "0x11f19916c12a60e29916025041000001",
+            "DEFAULT_LANGUAGE_CODE": "en",
+            "DESCRIPTION": "",
+            "DOCS_INTRO": "",
+            "ALIAS": "axenox.AtlassianConnector",
+            "NAME": "axenxo Atlassian Connector"
+        }
+    ],
+    "totals_rows": [],
+    "filters": {
+        "operator": "AND",
+        "base_object_alias": "exface.Core.APP",
+        "conditions": [
+            {
+                "expression": "UID",
+                "comparator": "=",
+                "value": "0x11f19916c12a60e29916025041000001",
+                "object_alias": "exface.Core.APP"
+            }
+        ]
+    },
+    "rows_limit": null,
+    "rows_offset": 0,
+    "sorters": [
+        {
+            "attribute_alias": "CREATED_ON",
+            "direction": "ASC"
+        },
+        {
+            "attribute_alias": "UID",
+            "direction": "ASC"
+        }
+    ]
+}

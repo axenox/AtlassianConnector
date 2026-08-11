@@ -1,0 +1,22 @@
+{
+    "name": "axenox/atlassianconnector",
+    "require": {
+        "exface/core": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "\\axenox\\AtlassianConnector\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Config/",
+            "/Translations/",
+            "/Model/"
+        ]
+    },
+    "extra": {
+        "app": {
+            "app_uid": "0x11f19916c12a60e29916025041000001",
+            "app_alias": "axenox.AtlassianConnector"
+        }
+    }
+}
