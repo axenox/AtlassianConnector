@@ -1,0 +1,116 @@
+{
+    "object_alias": "exface.Core.UXON_PRESET",
+    "columns": [
+        {
+            "name": "_EXPORT_SUMMARY",
+            "hidden": true,
+            "attribute_alias": "NAME"
+        },
+        {
+            "name": "CREATED_ON",
+            "attribute_alias": "CREATED_ON"
+        },
+        {
+            "name": "MODIFIED_ON",
+            "attribute_alias": "MODIFIED_ON"
+        },
+        {
+            "name": "CREATED_BY_USER",
+            "attribute_alias": "CREATED_BY_USER"
+        },
+        {
+            "name": "MODIFIED_BY_USER",
+            "attribute_alias": "MODIFIED_BY_USER"
+        },
+        {
+            "name": "UID",
+            "attribute_alias": "UID"
+        },
+        {
+            "name": "APP",
+            "attribute_alias": "APP"
+        },
+        {
+            "name": "NAME",
+            "attribute_alias": "NAME"
+        },
+        {
+            "name": "DESCRIPTION",
+            "attribute_alias": "DESCRIPTION"
+        },
+        {
+            "name": "PROTOTYPE",
+            "attribute_alias": "PROTOTYPE"
+        },
+        {
+            "name": "UXON",
+            "attribute_alias": "UXON"
+        },
+        {
+            "name": "WRAP_PATH",
+            "attribute_alias": "WRAP_PATH"
+        },
+        {
+            "name": "UXON_SCHEMA",
+            "attribute_alias": "UXON_SCHEMA"
+        },
+        {
+            "name": "THUMBNAIL",
+            "attribute_alias": "THUMBNAIL"
+        }
+    ],
+    "rows": [
+        {
+            "_EXPORT_SUMMARY": "Atlassian Client Credentials oAuth2.0",
+            "CREATED_ON": "2026-08-13 17:16:51",
+            "MODIFIED_ON": "2026-08-13 17:16:51",
+            "CREATED_BY_USER": "0x11e8fe1c902c8ebea23ee4b318306b9a",
+            "MODIFIED_BY_USER": "0x11e8fe1c902c8ebea23ee4b318306b9a",
+            "UID": "0x11f19f6002b7902e9f60025041000001",
+            "APP": "0x11f19916c12a60e29916025041000001",
+            "NAME": "Atlassian Client Credentials oAuth2.0",
+            "DESCRIPTION": "Preset for oAuth2.0 authentication for Atlassian apps using the Client Credential grant type",
+            "PROTOTYPE": "exface/urldataconnector/DataConnectors/HttpConnector.php",
+            "UXON": {
+                "url": "https://api.atlassian.com/ex/jira/CLOUD_ID/rest/api/3/",
+                "authentication": {
+                    "class": "\\axenox\\AtlassianConnector\\DataConnectors\\Authentication\\AtlassianClientCredentials",
+                    "client_id": "",
+                    "client_secret": "",
+                    "audience": "api.atlassian.com",
+                    "url_authorize": "https://auth.atlassian.com/authorize",
+                    "url_access_token": "https://auth.atlassian.com/oauth/token",
+                    "url_resource_owner_details": "https://api.atlassian.com/me"
+                }
+            },
+            "WRAP_PATH": "",
+            "UXON_SCHEMA": "connection",
+            "THUMBNAIL": ""
+        }
+    ],
+    "totals_rows": [],
+    "filters": {
+        "operator": "AND",
+        "base_object_alias": "exface.Core.UXON_PRESET",
+        "conditions": [
+            {
+                "expression": "APP",
+                "comparator": "=",
+                "value": "0x11f19916c12a60e29916025041000001",
+                "object_alias": "exface.Core.UXON_PRESET"
+            }
+        ]
+    },
+    "rows_limit": null,
+    "rows_offset": 0,
+    "sorters": [
+        {
+            "attribute_alias": "CREATED_ON",
+            "direction": "ASC"
+        },
+        {
+            "attribute_alias": "UID",
+            "direction": "ASC"
+        }
+    ]
+}
