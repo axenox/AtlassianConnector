@@ -1,7 +1,8 @@
 {
     "name": "axenox/atlassianconnector",
     "require": {
-        "exface/core": "^1.0"
+        "exface/core": "^1.0",
+        "axenox/oauth2connector": "^1.0"
     },
     "support": {
         "source": "https://github.com/axenox/AtlassianConnector",
