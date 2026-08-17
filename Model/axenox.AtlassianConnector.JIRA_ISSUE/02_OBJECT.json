@@ -87,13 +87,13 @@
         {
             "_EXPORT_SUMMARY": "Jira Issue [axenox.AtlassianConnector.JIRA_ISSUE]",
             "CREATED_ON": "2026-08-13 12:42:38",
-            "MODIFIED_ON": "2026-08-13 17:18:57",
+            "MODIFIED_ON": "2026-08-14 17:02:43",
             "CREATED_BY_USER": "0x11e8fe1c902c8ebea23ee4b318306b9a",
             "MODIFIED_BY_USER": "0x11e8fe1c902c8ebea23ee4b318306b9a",
             "UID": "0x11f18ce2b40e69f08ce2025041000001",
             "READABLE_FLAG": 1,
             "WRITABLE_FLAG": 0,
-            "COMMENTS": "Gets the Jira issues currently assigned to the authenticated user/service account",
+            "COMMENTS": "Gets a Jira Issue by key ",
             "DOCS": "",
             "NAME": "Jira Issue",
             "INHERIT_DATA_SOURCE_BASE_OBJECT": 0,
@@ -102,13 +102,15 @@
             "SHORT_DESCRIPTION": "",
             "PARENT_OBJECT": null,
             "DATA_ADDRESS_PROPS": {
+                "swagger_component": "IssueBean",
                 "response_data_path": "issues",
                 "response_total_count_path": "total",
-                "request_remote_pagination": false
+                "request_remote_pagination": false,
+                "force_filtering": true
             },
             "DEFAULT_EDITOR_UXON": null,
             "ALIAS": "JIRA_ISSUE",
-            "DATA_ADDRESS": "search/jql?jql=assignee%3DcurrentUser%28%29&fields=*all&maxResults=5"
+            "DATA_ADDRESS": "search/jql?jql=key%3D%22[#key#]%22&fields=*all"
         }
     ],
     "totals_rows": [],
