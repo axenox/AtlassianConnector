@@ -87,7 +87,7 @@
         {
             "_EXPORT_SUMMARY": "Jira Issue [axenox.AtlassianConnector.JIRA_ISSUE]",
             "CREATED_ON": "2026-08-13 12:42:38",
-            "MODIFIED_ON": "2026-08-14 17:02:43",
+            "MODIFIED_ON": "2026-08-21 08:41:48",
             "CREATED_BY_USER": "0x11e8fe1c902c8ebea23ee4b318306b9a",
             "MODIFIED_BY_USER": "0x11e8fe1c902c8ebea23ee4b318306b9a",
             "UID": "0x11f18ce2b40e69f08ce2025041000001",
@@ -110,7 +110,7 @@
             },
             "DEFAULT_EDITOR_UXON": null,
             "ALIAS": "JIRA_ISSUE",
-            "DATA_ADDRESS": "search/jql?jql=key%3D%22[#key#]%22&fields=*all"
+            "DATA_ADDRESS": "search/jql?jql=key%3D%22[#key#]%22&fields=*all&expand=renderedFields"
         }
     ],
     "totals_rows": [],
