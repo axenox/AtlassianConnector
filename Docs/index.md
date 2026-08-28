@@ -7,3 +7,6 @@ read/write data to Atlassian products using the Atlassian REST APIs.
 ## Table of contents
 
 - [Setting up data connections](Data_connections/index.md)
+- [Jira meta objects](Metaobjects/index.md)
+- [AI tools](AI_tools/index.md)
+- [Troubleshooting](Troubleshooting.md)
