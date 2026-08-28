@@ -6,6 +6,10 @@
   - [Using a service account](Connecting_via_service_account.md)
 - [Testing REST APIs](Testing_REST_APIs.md) without a data connection in the 
   model
+- Once a connection works, see [Jira meta objects](../Metaobjects/index.md) to
+  model Jira data, or [AI tools](../AI_tools/index.md) to let an agent write
+  to Jira
+- [Troubleshooting](../Troubleshooting.md) connection/certificate issues
 
 ## Quick intro
 
