@@ -8,6 +8,7 @@ modeling Jira data as meta objects and testing it.
 
 - [Meta objects are definitions, not storage](#meta-objects-are-definitions-not-storage)
 - [The Jira Issue object](#the-jira-issue-object)
+- [The Jira Comment object](#the-jira-comment-object)
 - [Making the search configurable](#making-the-search-configurable-eg-search-by-ticket-key)
 - [How GET/POST/PATCH/DELETE is chosen](#how-getpostpatchdelete-is-chosen)
 - [Auto-importing attributes via Swagger/OpenAPI](#auto-importing-attributes-via-swaggeropenapi)
@@ -100,6 +101,54 @@ uppercase convention - this keeps the mapping to the Swagger/OpenAPI import
 `currentUser()` in JQL - if you build your own search object using it -
 refers to the identity behind the OAuth token, i.e. the service account, not
 necessarily a specific human Jira user.
+
+## The Jira Comment object
+
+`axenox.AtlassianConnector.JIRA_COMMENT` reads the comments related to one
+Jira issue. Its data address uses the required issue-key placeholder:
+
+```
+issue/[#issue_key#]/comment
+```
+
+The object reads rows from Jira's `comments` response property and uses
+`total` as the total-count path. `force_filtering` prevents a request unless
+an issue key is supplied.
+
+`issue_key` is a relation to `JIRA_ISSUE.key`. Its exported cardinality is
+empty, so the model loader applies the `N1` (many-to-one) default. It can be
+adjusted through the model editor. Its data address is
+`[#~urlplaceholder:issue_key#]`, which exposes the issue key used in the URL
+as an attribute on every returned comment. The reverse relation available on
+`JIRA_ISSUE` is `JIRA_COMMENT[issue_key]` and represents all comments of the
+issue.
+
+| Attribute alias | Data address                         | Notes                         |
+|-----------------|--------------------------------------|-------------------------------|
+| `issue_key`     | `[#~urlplaceholder:issue_key#]`      | Relation to `JIRA_ISSUE.key` |
+| `id`            | `id`                                 | UID attribute                 |
+| `body`          | `body`                               | Raw ADF comment body          |
+| `body_markdown` | *(calculated)*                       | `=axenox.AtlassianConnector.AdfToMarkdown(body)` |
+| `author`        | `author/displayName`                 | Author display name           |
+| `created`       | `created`                            | Creation time                 |
+| `updated`       | `updated`                            | Last update time              |
+
+Always filter `issue_key` when reading the object, for example:
+
+```json
+{
+  "widget_type": "DataTable",
+  "object_alias": "axenox.AtlassianConnector.JIRA_COMMENT",
+  "filters": [
+    {"attribute_alias": "issue_key", "value": "ABC-123", "required": true}
+  ],
+  "columns": [
+    {"attribute_alias": "author"},
+    {"attribute_alias": "created"},
+    {"attribute_alias": "body_markdown"}
+  ]
+}
+```
 
 ## Making the search configurable (e.g. search by ticket key)
 
