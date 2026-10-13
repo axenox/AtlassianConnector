@@ -6,8 +6,7 @@ use axenox\AtlassianConnector\Common\MarkdownToAdfConverter;
 use axenox\GenAI\Common\AbstractAiTool;
 use axenox\GenAI\Common\AiToolResultString;
 use axenox\GenAI\Exceptions\AiToolRuntimeError;
-use axenox\GenAI\Interfaces\AiAgentInterface;
-use axenox\GenAI\Interfaces\AiPromptInterface;
+use axenox\GenAI\Interfaces\AiTaskHandlerInterface;
 use axenox\GenAI\Interfaces\AiToolResultInterface;
 use exface\Core\CommonLogic\Actions\ServiceParameter;
 use exface\Core\CommonLogic\UxonObject;
@@ -20,6 +19,7 @@ use exface\Core\Factories\DataConnectionFactory;
 use exface\Core\Factories\DataSheetFactory;
 use exface\Core\Factories\DataTypeFactory;
 use exface\Core\Interfaces\DataTypes\DataTypeInterface;
+use exface\Core\Interfaces\Tasks\TaskInterface;
 use exface\Core\Interfaces\WorkbenchInterface;
 use exface\UrlDataConnector\Interfaces\HttpConnectionInterface;
 use GuzzleHttp\Psr7\Request;
@@ -86,7 +86,7 @@ class UpdateJiraDescriptionSectionTool extends AbstractAiTool
      * {@inheritDoc}
      * @see \axenox\GenAI\Interfaces\AiToolInterface::invoke()
      */
-    public function invoke(AiAgentInterface $agent, AiPromptInterface $prompt, array $arguments): AiToolResultInterface
+    public function invoke(AiTaskHandlerInterface $agent, TaskInterface $prompt, array $arguments): AiToolResultInterface
     {
         $key = trim((string) ($arguments[0] ?? ''));
         $content = trim((string) ($arguments[1] ?? ''));
@@ -143,12 +143,12 @@ class UpdateJiraDescriptionSectionTool extends AbstractAiTool
     /**
     * Validates required arguments, configured boundaries and the ticket allow-list.
     *
-    * @param AiPromptInterface $prompt
+    * @param TaskInterface $prompt
     * @param string $key
     * @param string $content
     * @return void
     */
-    private function validateInvocation(AiPromptInterface $prompt, string $key, string $content): void
+    private function validateInvocation(TaskInterface $prompt, string $key, string $content): void
     {
         if ($key === '') {
             throw new AiToolRuntimeError($this, $prompt, 'Missing required argument: key');
