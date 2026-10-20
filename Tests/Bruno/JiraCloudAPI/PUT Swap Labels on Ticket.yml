@@ -1,0 +1,54 @@
+info:
+  name: PUT Swap Labels on Ticket
+  type: http
+  seq: 12
+
+http:
+  method: PUT
+  url: https://api.atlassian.com/ex/jira/{{cloud_id}}/rest/api/3/issue/ADACN-2
+  headers:
+    - name: Accept
+      value: application/json
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "update": {
+          "labels": [
+            { "remove": "saskias-test-label" },
+            { "add": "saskias-new-label" }
+          ]
+        }
+      }
+  auth:
+    type: oauth2
+    flow: client_credentials
+    accessTokenUrl: https://auth.atlassian.com/oauth/token
+    credentials:
+      clientId: "{{client_id}}"
+      clientSecret: "{{client_secret}}"
+      placement: basic_auth_header
+    tokenConfig:
+      id: credentials
+      placement:
+        header: Bearer
+      source: access_token
+    settings:
+      autoFetchToken: true
+      autoRefreshToken: false
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: true
+
+docs: |-
+  Adds and removes labels in one request. The operations in the "labels" array are applied in the
+  given order, so a label removed first can be added again afterwards.
+
+  All other labels of the ticket stay untouched. Jira answers with 204 and an empty body, so use
+  "GET Issue" with ?fields=labels to verify the result.
