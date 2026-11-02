@@ -4,9 +4,13 @@
         "exface/core": "^1.0",
         "axenox/oauth2connector": "^1.0"
     },
+    "license": [
+        "GPL-3.0+",
+        "proprietary"
+    ],
     "support": {
         "source": "https://github.com/axenox/AtlassianConnector",
-        "docs": "https://github.com/axenox/AtlassianConnector/blob/1.x-dev/Docs",
+        "docs": "https://github.com/axenox/AtlassianConnector/blob/master/Docs",
         "issues": "https://github.com/axenox/AtlassianConnector/issues"
     },
     "autoload": {
