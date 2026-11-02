@@ -4,8 +4,7 @@ namespace axenox\AtlassianConnector\AI\Tools;
 use axenox\GenAI\Common\AbstractAiTool;
 use axenox\GenAI\Common\AiToolResultString;
 use axenox\GenAI\Exceptions\AiToolRuntimeError;
-use axenox\GenAI\Interfaces\AiAgentInterface;
-use axenox\GenAI\Interfaces\AiPromptInterface;
+use axenox\GenAI\Interfaces\AiTaskHandlerInterface;
 use axenox\GenAI\Interfaces\AiToolResultInterface;
 use exface\Core\CommonLogic\Actions\ServiceParameter;
 use exface\Core\CommonLogic\UxonObject;
@@ -14,6 +13,7 @@ use exface\Core\Factories\DataConnectionFactory;
 use exface\Core\Factories\DataTypeFactory;
 use exface\Core\Exceptions\InvalidArgumentException;
 use exface\Core\Interfaces\DataTypes\DataTypeInterface;
+use exface\Core\Interfaces\Tasks\TaskInterface;
 use exface\Core\Interfaces\WorkbenchInterface;
 use exface\UrlDataConnector\Interfaces\HttpConnectionInterface;
 use GuzzleHttp\Psr7\Request;
@@ -65,7 +65,7 @@ class CommentOnJiraTicketTool extends AbstractAiTool
      * {@inheritDoc}
      * @see \axenox\GenAI\Interfaces\AiToolInterface::invoke()
      */
-    public function invoke(AiAgentInterface $agent, AiPromptInterface $prompt, array $arguments): AiToolResultInterface
+    public function invoke(AiTaskHandlerInterface $agent, TaskInterface $prompt, array $arguments): AiToolResultInterface
     {
         $key = trim((string) ($arguments[0] ?? ''));
         $comment = trim((string) ($arguments[1] ?? ''));
