@@ -50,6 +50,8 @@ use GuzzleHttp\Psr7\Request;
  * }
  *
  * ```
+ * 
+ * @author GitHub Copilot
  */
 class UpdateJiraDescriptionSectionTool extends AbstractAiTool
 {
@@ -133,8 +135,7 @@ class UpdateJiraDescriptionSectionTool extends AbstractAiTool
         }
 
         return new AiToolResultString(
-            $this,
-            $arguments,
+            $this->getWorkbench(),
             'Section "' . $this->sectionHeading . '" updated in Jira ticket "' . $key . '".',
             $this->getReturnDataType()
         );
@@ -142,12 +143,14 @@ class UpdateJiraDescriptionSectionTool extends AbstractAiTool
 
     /**
     * Validates required arguments, configured boundaries and the ticket allow-list.
-    *
+     * 
     * @param TaskInterface $prompt
     * @param string $key
     * @param string $content
     * @return void
-    */
+     * 
+     * @throws AiToolRuntimeError
+     */
     private function validateInvocation(TaskInterface $prompt, string $key, string $content): void
     {
         if ($key === '') {
@@ -176,10 +179,12 @@ class UpdateJiraDescriptionSectionTool extends AbstractAiTool
 
     /**
     * Reads the latest raw ADF description for exactly one Jira issue through its metaobject.
-    *
+     * 
     * @param string $key
-    * @return array
-    */
+    * @return array<array-key,mixed>
+     * 
+     * @throws CoreRuntimeException
+     */
     private function readDescription(string $key): array
     {
         $sheet = DataSheetFactory::createFromObjectIdOrAlias($this->getWorkbench(), self::JIRA_ISSUE_OBJECT);
@@ -215,11 +220,13 @@ class UpdateJiraDescriptionSectionTool extends AbstractAiTool
 
     /**
     * Replaces the managed top-level ADF section or appends it when it does not exist.
-    *
-    * @param array $description
+     * 
+    * @param array<array-key,mixed> $description
     * @param string $content
-    * @return array
-    */
+    * @return array<array-key,mixed>
+     * 
+     * @throws CoreRuntimeException
+     */
     private function replaceSection(array $description, string $content): array
     {
         $nodes = $description['content'];
@@ -281,7 +288,7 @@ class UpdateJiraDescriptionSectionTool extends AbstractAiTool
 
     /**
      * Restores empty ADF attribute maps that associative JSON decoding turns into PHP arrays.
-     *
+     * 
      * @param mixed $value
      * @param string|null $key
      * @return mixed
@@ -302,7 +309,7 @@ class UpdateJiraDescriptionSectionTool extends AbstractAiTool
 
     /**
     * Determines whether an ADF node is the configured section heading.
-    *
+     * 
     * @param mixed $node
     * @return bool
     */
@@ -315,8 +322,8 @@ class UpdateJiraDescriptionSectionTool extends AbstractAiTool
 
     /**
     * Recursively extracts plain text from an ADF node for heading comparison.
-    *
-    * @param array $node
+     * 
+    * @param array<array-key,mixed> $node
     * @return string
     */
     private function getNodeText(array $node): string
@@ -332,8 +339,8 @@ class UpdateJiraDescriptionSectionTool extends AbstractAiTool
 
     /**
     * Builds the ADF heading node used when the managed section is missing.
-    *
-    * @return array
+     * 
+    * @return array<array-key,mixed>
     */
     private function buildHeadingNode(): array
     {
@@ -346,8 +353,8 @@ class UpdateJiraDescriptionSectionTool extends AbstractAiTool
 
     /**
      * Builds the warning panel that identifies the managed section as AI-generated content.
-     *
-     * @return array
+     * 
+     * @return array<array-key,mixed>
      */
     private function buildAiGeneratedHintNode(): array
     {
@@ -363,9 +370,11 @@ class UpdateJiraDescriptionSectionTool extends AbstractAiTool
 
     /**
     * Loads the configured Jira connection and ensures that it supports HTTP requests.
-    *
+     * 
     * @return HttpConnectionInterface
-    */
+     * 
+     * @throws CoreRuntimeException
+     */
     private function getConnection(): HttpConnectionInterface
     {
         $connection = DataConnectionFactory::createFromModel($this->getWorkbench(), $this->connectionAlias);
@@ -377,7 +386,7 @@ class UpdateJiraDescriptionSectionTool extends AbstractAiTool
 
     /**
     * Checks the ticket key against the configured prefixes.
-    *
+     * 
     * @param string $key
     * @return bool
     */
@@ -393,11 +402,11 @@ class UpdateJiraDescriptionSectionTool extends AbstractAiTool
 
     /**
      * The Jira HTTP connection used to update the issue.
-     *
+     * 
      * @uxon-property connection_alias
      * @uxon-type metamodel:connection
      * @uxon-required true
-     *
+     * 
      * @param string $value
      * @return UpdateJiraDescriptionSectionTool
      */
@@ -409,13 +418,15 @@ class UpdateJiraDescriptionSectionTool extends AbstractAiTool
 
     /**
      * Exact top-level heading whose content this tool manages.
-     *
+     * 
      * @uxon-property section_heading
      * @uxon-type string
      * @uxon-required true
-     *
+     * 
      * @param string $value
      * @return UpdateJiraDescriptionSectionTool
+     * 
+     * @throws InvalidArgumentException
      */
     public function setSectionHeading(string $value): UpdateJiraDescriptionSectionTool
     {
@@ -429,17 +440,19 @@ class UpdateJiraDescriptionSectionTool extends AbstractAiTool
 
     /**
      * Warning shown at the beginning of every managed section to identify AI-generated content.
-     *
+     * 
      * The hint is rendered as a Jira warning panel and cannot be disabled. Configure a localized
      * or use-case-specific warning when the default text is not suitable.
-     *
+     * 
      * @uxon-property ai_generated_hint
      * @uxon-type string
      * @uxon-default This content was generated by AI and may contain errors. Verify it before use.
      * @uxon-translatable true
-     *
+     * 
      * @param string $value
      * @return UpdateJiraDescriptionSectionTool
+     * 
+     * @throws InvalidArgumentException
      */
     public function setAiGeneratedHint(string $value): UpdateJiraDescriptionSectionTool
     {
@@ -453,13 +466,15 @@ class UpdateJiraDescriptionSectionTool extends AbstractAiTool
 
     /**
      * Maximum number of chars accepted in the replacement content.
-     *
+     * 
      * @uxon-property max_content_length
      * @uxon-type integer
      * @uxon-default 20000
-     *
+     * 
      * @param int $value
      * @return UpdateJiraDescriptionSectionTool
+     * 
+     * @throws InvalidArgumentException
      */
     public function setMaxContentLength(int $value): UpdateJiraDescriptionSectionTool
     {
@@ -472,13 +487,15 @@ class UpdateJiraDescriptionSectionTool extends AbstractAiTool
 
     /**
      * Only allow tickets whose key starts with one of these prefixes.
-     *
+     * 
      * @uxon-property allowed_key_prefixes
      * @uxon-type string[]
      * @uxon-template ["PROJECT-"]
-     *
+     * 
      * @param UxonObject $value
      * @return UpdateJiraDescriptionSectionTool
+     * 
+     * @throws InvalidArgumentException
      */
     public function setAllowedKeyPrefixes(UxonObject $value): UpdateJiraDescriptionSectionTool
     {

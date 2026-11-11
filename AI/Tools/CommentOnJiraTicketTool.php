@@ -121,8 +121,7 @@ class CommentOnJiraTicketTool extends AbstractAiTool
         }
 
         return new AiToolResultString(
-            $this,
-            $arguments,
+            $this->getWorkbench(),
             'Comment added to Jira ticket "' . $key . '".',
             $this->getReturnDataType()
         );
@@ -130,9 +129,9 @@ class CommentOnJiraTicketTool extends AbstractAiTool
 
     /**
      * Converts plain text into ADF paragraph nodes, splitting on blank lines.
-     *
+     * 
      * @param string $text
-     * @return array
+     * @return array<array-key,mixed>
      */
     protected function buildAdfParagraphs(string $text): array
     {
@@ -180,11 +179,11 @@ class CommentOnJiraTicketTool extends AbstractAiTool
 
     /**
      * The Jira data connection to comment through.
-     *
+     * 
      * @uxon-property connection_alias
      * @uxon-type metamodel:connection
      * @uxon-required true
-     *
+     * 
      * @param string $value
      * @return CommentOnJiraTicketTool
      */
@@ -196,13 +195,15 @@ class CommentOnJiraTicketTool extends AbstractAiTool
 
     /**
      * Only allow commenting on tickets whose key starts with one of these project prefixes.
-     *
+     * 
      * @uxon-property allowed_key_prefixes
      * @uxon-type string[]
      * @uxon-template ["PROJECT-"]
-     *
+     * 
      * @param UxonObject $value
      * @return CommentOnJiraTicketTool
+     * 
+     * @throws InvalidArgumentException
      */
     public function setAllowedKeyPrefixes(UxonObject $value): CommentOnJiraTicketTool
     {
@@ -223,11 +224,11 @@ class CommentOnJiraTicketTool extends AbstractAiTool
 
     /**
      * Alternative/addition to `allowed_key_prefixes`: a regular expression the ticket key must match.
-     *
+     * 
      * @uxon-property allowed_key_pattern
      * @uxon-type string
      * @uxon-template /^PROJECT-\d+$/
-     *
+     * 
      * @param string $value
      * @return CommentOnJiraTicketTool
      */
