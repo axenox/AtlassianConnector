@@ -1,0 +1,20 @@
+{
+    "uid": "0x11f1a3bccb0d05fea3bc025041000001",
+    "alias_with_namespace": "axenox.atlassianconnector.atlassian-connection",
+    "menu_parent_page_selector": "0xf8310d4bba2c11e7895fe4b318306b9a",
+    "menu_index": 14,
+    "menu_visible": true,
+    "name": "Atlassian Connector",
+    "description": "",
+    "intro": "",
+    "replaces_page_selector": null,
+    "created_by_user_selector": "0x11e8fe1c902c8ebea23ee4b318306b9a",
+    "created_on": "2026-08-17 11:26:57",
+    "modified_by_user_selector": "0x11e8fe1c902c8ebea23ee4b318306b9a",
+    "modified_on": "2026-11-26 15:12:00",
+    "contents": {
+        "widget_type": "NavTiles",
+        "object_alias": "exface.Core.PAGE",
+        "depth": 1
+    }
+}

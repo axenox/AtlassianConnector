@@ -1,0 +1,63 @@
+{
+    "uid": "0x11f18861e76e8bc88861025041000001",
+    "alias_with_namespace": "axenox.atlassianconnector.jira-ticket-search",
+    "menu_parent_page_selector": "0x11f1a3bccb0d05fea3bc025041000001",
+    "menu_index": 0,
+    "menu_visible": true,
+    "name": "Jira Ticket Search",
+    "description": "Search for Jira Tickets using the ticket key",
+    "intro": "",
+    "replaces_page_selector": null,
+    "created_by_user_selector": "0x11e8fe1c902c8ebea23ee4b318306b9a",
+    "created_on": "2026-08-17 11:27:45",
+    "modified_by_user_selector": "0x11e8fe1c902c8ebea23ee4b318306b9a",
+    "modified_on": "2026-11-26 15:45:16",
+    "contents": {
+        "widget_type": "DataTable",
+        "object_alias": "axenox.AtlassianConnector.JIRA_ISSUE",
+        "filters": [
+            {
+                "attribute_alias": "key",
+                "required": true
+            }
+        ],
+        "columns": [
+            {
+                "attribute_group_alias": "~ALL"
+            }
+        ],
+        "buttons": [
+            {
+                "caption": "Attachment Gallery",
+                "icon": "image",
+                "action": {
+                    "alias": "exface.Core.ShowDialog",
+                    "input_rows_min": 1,
+                    "input_rows_max": 1,
+                    "prefill_with_input_data": true,
+                    "prefill_with_prefill_data": false,
+                    "prefill_with_filter_context": false,
+                    "widget": {
+                        "widget_type": "ImageGallery",
+                        "object_alias": "axenox.AtlassianConnector.JIRA_ATTACHMENT",
+                        "width": "800px",
+                        "height": "500px",
+                        "filters": [
+                            {
+                                "attribute_alias": "issue_key",
+                                "comparator": "==",
+                                "required": true,
+                                "input_widget": {
+                                    "widget_type": "Input"
+                                }
+                            }
+                        ],
+                        "hide_header": false,
+                        "upload_enabled": false,
+                        "download_enabled": true
+                    }
+                }
+            }
+        ]
+    }
+}
