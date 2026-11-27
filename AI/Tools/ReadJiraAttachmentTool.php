@@ -14,7 +14,6 @@ use exface\Core\DataTypes\StringDataType;
 use exface\Core\Exceptions\InvalidArgumentException;
 use exface\Core\Factories\DataSheetFactory;
 use exface\Core\Factories\DataTypeFactory;
-use exface\Core\Interfaces\DataSheets\DataSheetInterface;
 use exface\Core\Interfaces\DataSources\FileDownloadConnectionInterface;
 use exface\Core\Interfaces\DataTypes\DataTypeInterface;
 use exface\Core\Interfaces\Filesystem\FileInfoInterface;
@@ -52,7 +51,7 @@ class ReadJiraAttachmentTool extends AbstractAiTool
             throw new AiToolRuntimeError($this, $prompt, 'The Jira project is not allowed by this tool.');
         }
 
-        $attachments = $this->createDataSheet(self::ATTACHMENT_OBJECT);
+        $attachments = DataSheetFactory::createFromObjectIdOrAlias($this->getWorkbench(), self::ATTACHMENT_OBJECT);
         $object = $attachments->getMetaObject();
         $behaviors = $object->getBehaviors()->getByPrototypeClass(FileBehavior::class);
         $behavior = $behaviors->isEmpty() ? null : $behaviors->getFirst();
@@ -107,11 +106,6 @@ class ReadJiraAttachmentTool extends AbstractAiTool
         }
 
         throw new AiToolRuntimeError($this, $prompt, 'The attachment was not found on the specified Jira issue or is not accessible.');
-    }
-
-    protected function createDataSheet(string $objectAlias): DataSheetInterface
-    {
-        return DataSheetFactory::createFromObjectIdOrAlias($this->getWorkbench(), $objectAlias);
     }
 
     /**
